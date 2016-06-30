@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			#oform {
+				width:300px;
+				margin:200px auto;
+			}
+			label {
+				width: 100px;
+				display:inline-block;
+			}
+		</style>
+		<script src="js/jquery-1.11.3.js"></script>
+		<script type="text/javascript">
+			function addCookie(_name,_value,_day){
+				var d = new Date();
+				d.setDate(d.getDate()+_day);
+				document.cookie = _name+"="+_value+";expires="+d.toGMTString()+";path=/";
+				//toGMTString()将日期转换为字符串
+//				var d = new Date().getDate();
+//				d = new Date(d + _day);
+//				document.cookie = _name+"="+_value+";expires="+d+";path=/";
+			}
+			function getCookie(_name){
+				var str = "";
+				var col = document.cookie.split(";");
+				for(var i in col){
+					var arr = col[i].split("=");
+					if(arr[0] == _name){
+						str = arr[1];
+						break;
+					}
+				}
+				return str;
+			}
+			function delCookie(_name){
+				document.cookie = _name+";expires=-1;path=/";
+			}
+			$(function(){
+				$("#btn").click(function(){
+					var uName = $("#uname").val();
+					var uPass = $("#upass").val();
+					if(uName == ""){
+						alert("请输入你的用户名")
+					}else if(upass == "") {
+						alert("请输入你的密码")
+					}else{
+						addCookie("uname",uName,1000*60*60)
+					}
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<form action="" method="post" id="oform">
+			<div>
+				<label>用户名</label>
+				<input type="text" id="uname" />
+			</div><br /><br />
+			<div>
+				<label>密码</label>
+				<input type="password" id="upass" />
+			</div><br /><br />
+			<div>
+				<label>再次输入密码</label>
+				<input type="password" id="agapass" />
+			</div><br /><br />
+			<input type="button" value="注册" id="btn" />
+		</form>
+	</body>
+</html>
